@@ -5,4 +5,8 @@ void main(){
     expect(5+2, 7);
   });
 
+  test('Dummy Test 2', (){
+    expect(5+4, 9);
+  });
+
 }
