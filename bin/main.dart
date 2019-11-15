@@ -12,7 +12,7 @@
 ////  - min(A) = 2 > 1 = min(B) and
 ////   - max(A) = 9 < 10 = max(B)
 bool matryoshkaDolls(List<List<int>> dolls) {
-  dolls.sort(sizeComaprator);
+  dolls.sort(sizeComparator);
   print(dolls);
   for (int i = 0; i < dolls.length-1; i++) {
     if (!(dolls[i].last<dolls[i+1].last&&dolls[i][0]>dolls[i+1][0])){
@@ -22,7 +22,12 @@ bool matryoshkaDolls(List<List<int>> dolls) {
   return true;
 }
 
-int sizeComaprator(List a, List b) {
+int sizeComparator(List a, List b) {
+  if(a.length ==1){
+    a.add(a[0]);
+  }if(b.length ==1){
+    b.add(b[0]);
+  }
   a.sort();
   b.sort();
   if (a[0] > b[0]) return -1;
@@ -35,11 +40,11 @@ int sizeComaprator(List a, List b) {
 main() {
   print(matryoshkaDolls([
     [2, 3, 9, 5],
-    [10, 2, 1]
+    [10, 2, 1],[8]
   ]));
   print(matryoshkaDolls([[7,8],[4,5],[2,3],[1,2]]));
   print(matryoshkaDolls([[1,10],[2,9],[4,5],[4,7]]));
-  print(matryoshkaDolls([[1,5],[2,6],[3,7],[4,8]]));
+  print(matryoshkaDolls([[1,5],[2,6],[4,8],[3,5]]));
 
 
 }
