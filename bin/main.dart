@@ -12,39 +12,45 @@
 ////  - min(A) = 2 > 1 = min(B) and
 ////   - max(A) = 9 < 10 = max(B)
 bool matryoshkaDolls(List<List<int>> dolls) {
+  dolls.forEach((doll) => doll.sort());
   dolls.sort(sizeComparator);
-  print(dolls);
-  for (int i = 0; i < dolls.length-1; i++) {
-    if (!(dolls[i].last<dolls[i+1].last&&dolls[i][0]>dolls[i+1][0])){
+  for (int i = 0; i < dolls.length - 1; i++) {
+    if (!canBeStacked(dolls[i], dolls[i + 1])) {
       return false;
     }
   }
   return true;
 }
 
-int sizeComparator(List a, List b) {
-  if(a.length ==1){
-    a.add(a[0]);
-  }if(b.length ==1){
-    b.add(b[0]);
-  }
-  a.sort();
-  b.sort();
-  if (a[0] > b[0]) return -1;
-  if (a[0] == b[0]) return 0;
-  if (a[0] < b[0]) return 1;
-}
+bool canBeStacked(List<int> doll1, List<int> doll2) =>
+    (doll1.last < doll2.last && doll1.first > doll2.first);
+
+int sizeComparator(List a, List b) => b.first.compareTo(a.first);
 
 /// Create a function that returns true if every single sub-array inside an array
 /// can be nested Matroyshka style, and false otherwise.
 main() {
   print(matryoshkaDolls([
     [2, 3, 9, 5],
-    [10, 2, 1],[8]
+    [10, 2, 1],
+    [8]
   ]));
-  print(matryoshkaDolls([[7,8],[4,5],[2,3],[1,2]]));
-  print(matryoshkaDolls([[1,10],[2,9],[4,5],[4,7]]));
-  print(matryoshkaDolls([[1,5],[2,6],[4,8],[3,5]]));
-
-
+  print(matryoshkaDolls([
+    [7, 8],
+    [4, 5],
+    [2, 3],
+    [1, 2]
+  ]));
+  print(matryoshkaDolls([
+    [1, 10],
+    [2, 9],
+    [4, 5],
+    [4, 7]
+  ]));
+  print(matryoshkaDolls([
+    [1, 5],
+    [2, 6],
+    [4, 8],
+    [3, 5]
+  ]));
 }
